@@ -8,4 +8,14 @@ output: github_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
+set.seed(1)
 ```
+
+##Problem 1
+
+Reading in and tidying the data
+```{r}
+longitudinal_data = list.files(path = "./data", full.names = TRUE) %>% 
+  map(read_csv)
+```
+
