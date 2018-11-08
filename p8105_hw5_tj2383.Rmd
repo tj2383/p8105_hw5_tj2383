@@ -13,7 +13,7 @@ set.seed(1)
 
 ##Problem 1
 
-In this code chunk I read in the data and created the dataframe along with the variables for control/experiment arm, subject ID, and value. Then I unnested the `value` variable to separate out the weeks and I aggregated across weeks to tidy the data. Lastly, I renamed the values under the `arm` variable and specified them as Control or Experiment. 
+In this code chunk I read in the data and created the dataset along with the variables for control/experiment arm, subject ID, and value. Then I unnested the `value` variable to separate out the weeks and I aggregated across weeks to tidy the data. Lastly, I renamed the values under the `arm` variable and specified them as Control or Experiment. 
 ```{r}
 data = list.files(path = "./data", full.names = TRUE)
 
@@ -89,12 +89,17 @@ homicide_data %>%
 This dataset contains information on homicides from 50 cities across the United States over a decade. The Washington Post has identified the places where murder is common but arrests are rare. The dataset contains `r homicide_data %>% nrow() ` reports on homicides and `r homicide_data %>% ncol() ` variables. The key variables include victim's last name (`victim_last`), victim's first name (`victim_first`), race of the victim (`victim_race`), victim's age (`victim_age`), victim's sex (`victim_sex`), `city` of homicide, `state` of homicide, and the `disposition`. The following is an example of this data: This victim is a `r homicide_data %>% select(victim_sex) %>% head(1)` of `r homicide_data %>% select(victim_age) %>% head(1) ` age and his name is `r homicide_data %>% select(victim_first, victim_last) %>% head(1) `. The homicide occurred in `r homicide_data %>% select(city, state) %>% head(1) ` and the status of the case is `r homicide_data %>% select(disposition) %>% head(1)`.
 
 
-In this code chunk, I create a city_state variable. And then I summarized within cities to obtain the total number of homicides and the number of unsolved homicides (those for which the disposition is “Closed without arrest” or “Open/No arrest”).
+In this code chunk, I create a `city_state` variable. Then I created a new dataset called total_homicides that summarizes within cities to obtain the total number of homicides and the number of unsolved homicides (those for which the disposition is “Closed without arrest” or “Open/No arrest”).
 ```{r}
 homicide_data_combined = 
   homicide_data %>% 
   mutate(city_state = paste(city, state, sep = ", ")) %>% 
   select(-city, -state)
+
+total_homicides = 
+  homicide_data_combined %>% 
+  group_by(city_state) %>% 
+  summarize(total_homicides = n(), unsolved_homicides = sum(disposition == "Closed without arrest" | disposition == "Open/No arrest"))
 ```
 
 
