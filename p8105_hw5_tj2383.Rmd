@@ -13,7 +13,7 @@ set.seed(1)
 
 ##Problem 1
 
-In this code chunk I read in the data and created the dataframe along with the variables for control/experiment arm, subject ID, and value. Then I unnested the `value` variable to separate out the weeks and I aggregated across weeks to tidy the data.
+In this code chunk I read in the data and created the dataframe along with the variables for control/experiment arm, subject ID, and value. Then I unnested the `value` variable to separate out the weeks and I aggregated across weeks to tidy the data. Lastly, I renamed the values under the `arm` variable and specified them as Control or Experiment. 
 ```{r}
 data = list.files(path = "./data", full.names = TRUE)
 
@@ -25,6 +25,10 @@ longitudinal_data =
   ) %>% 
   unnest() %>% 
   gather(key = "week", week_1:week_8, value = "value")
+
+longitudinal_data$arm <- as.character(longitudinal_data$arm)
+longitudinal_data$arm[longitudinal_data$arm == "TRUE"] <- "Control"
+longitudinal_data$arm[longitudinal_data$arm == "FALSE"] <- "Experiment"
 
 ```
 
