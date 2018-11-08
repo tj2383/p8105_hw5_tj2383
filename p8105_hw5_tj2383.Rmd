@@ -52,3 +52,12 @@ longitudinal_data_clean %>%
     theme_bw()
 ```
 From this plot it is clear that the values for those in the experiment arm fluctuate but are overall increasing over time. However, for the control arm we see that the values fluctuate but remain low over time.
+
+
+##Problem 2
+
+Reading in the homicide data.
+```{r}
+homicide_data = read.csv("./data/homicide-data.csv")
+```
+
