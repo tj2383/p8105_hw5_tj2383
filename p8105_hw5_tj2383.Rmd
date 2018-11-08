@@ -56,8 +56,34 @@ From this plot it is clear that the values for those in the experiment arm fluct
 
 ##Problem 2
 
-Reading in the homicide data.
+Reading in the homicide data and calculating some descriptive statistics to describe the dataset.
 ```{r}
 homicide_data = read.csv("./data/homicide-data.csv")
-```
 
+homicide_data %>% 
+  nrow()
+
+homicide_data %>% 
+  ncol()
+
+homicide_data %>% 
+  select(victim_age) %>% 
+  head(1)
+
+homicide_data %>% 
+  select(victim_sex) %>% 
+  head(1)
+
+homicide_data %>% 
+  select(victim_first, victim_last) %>% 
+  head(1)
+
+homicide_data %>% 
+  select(city, state) %>% 
+  head(1)
+
+homicide_data %>% 
+  select(disposition) %>% 
+  head(1)
+```
+This dataset contains information on homicides from 50 cities across the United States over a decade. The Washington Post has identified the places where murder is common but arrests are rare. The dataset contains `r homicide_data %>% nrow() ` reports on homicides and `r homicide_data %>% ncol() ` variables. The key variables include victim's last name (`victim_last`), victim's first name (`victim_first`), race of the victim (`victim_race`), victim's age (`victim_age`), victim's sex (`victim_sex`), `city` of homicide, `state` of homicide, and the `disposition`. The following is an example of this data: This victim is a `r homicide_data %>% select(victim_sex) %>% head(1)` of `r homicide_data %>% select(victim_age) %>% head(1) ` age and his name is `r homicide_data %>% select(victim_first, victim_last) %>% head(1) `. The homicide occurred in `r homicide_data %>% select(city, state) %>% head(1) ` and the status of the case is `r homicide_data %>% select(disposition) %>% head(1)`.
