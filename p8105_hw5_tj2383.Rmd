@@ -13,7 +13,7 @@ set.seed(1)
 
 ##Problem 1
 
-In this code chunk I read in the data and created the dataset along with the variables for control/experiment arm, subject ID, and value. Then I unnested the `value` variable to separate out the weeks and I aggregated across weeks to tidy the data. Lastly, I renamed the values under the `arm` variable and specified them as Control or Experiment. 
+In this code chunk I read in the data and created a dataset along with the variables for control/experiment arm, subject ID, and value. Then I unnested the `value` variable to separate out the weeks and I aggregated across weeks to tidy the data. Lastly, I renamed the values under the `arm` variable and specified them as Control or Experiment. 
 ```{r}
 data = list.files(path = "./data", full.names = TRUE)
 
@@ -56,7 +56,7 @@ From this plot it is clear that the values for those in the experiment arm fluct
 
 ##Problem 2
 
-Reading in the homicide data and calculating some descriptive statistics to describe the dataset.
+Reading in the homicide data and describing the overall dataset.
 ```{r}
 homicide_data = read.csv("./data/homicide-data.csv")
 
