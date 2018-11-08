@@ -102,6 +102,28 @@ total_homicides =
   summarize(total_homicides = n(), unsolved_homicides = sum(disposition == "Closed without arrest" | disposition == "Open/No arrest"))
 ```
 
+In this code chunk I calculate the proportion of homicides that are unsolved by each city.
+```{r}
+baltimore_homicides =
+  total_homicides %>% 
+  filter(city_state == "Baltimore, MD")
+  
+prop = 
+  prop.test(x = baltimore_homicides$unsolved_homicides,
+            n = baltimore_homicides$total_homicides) %>% 
+  broom::tidy() %>% 
+  select(estimate, conf.low, conf.high)
+prop$estimate
+prop$conf.low
+prop$conf.high
+```
+The estimated proportion of unsolved cases in Baltimore is `r prop$estimate` and the 95% confidence interval is from `r prop$conf.low` to `r prop$conf.high`.
+
+```{r}
+
+```
+
+
 
 
 
