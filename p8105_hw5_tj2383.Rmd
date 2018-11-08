@@ -13,7 +13,7 @@ set.seed(1)
 
 ##Problem 1
 
-Reading in and tidying the data
+In this code chunk I read in the data and created the dataframe along with the variables for control/experiment arm, subject ID, and value. Then I unnested the `value` variable to separate out the weeks and I aggregated across weeks to tidy the data.
 ```{r}
 data = list.files(path = "./data", full.names = TRUE)
 
@@ -21,8 +21,11 @@ longitudinal_data =
   data_frame(
     arm = str_detect(data, "con"),
     subject_id = str_extract(data, "\\d+(?=.csv)"),
-    data = map(data, read_csv)
-  )
+    value = map(data, read_csv)
+  ) %>% 
+  unnest() %>% 
+  gather(key = "week", week_1:week_8, value = "value")
+
 ```
 
 
